@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- 
+    <meta charset="utf-8" />
+-->
+    <title>Piano App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <script src="audiosynth.js"></script>
+    <script src="getKeySignature.js"></script>
+    <script src="playKeyboard.js"></script>
+    <h1>Piano Key Signature Helper</h1>
+    <div id="keyboard"></div>
+    <button>Record</button>
+    <button>Reset</button>
+    <svg height="100" width="100">
+      <circle cx="50" cy="50" r="7" fill="red" />
+    </svg>
+    <div id="keysignatures"></div>
+    <script type="text/javascript">
+      playKeyboard();
+    </script>
+  </body>
+</html>
