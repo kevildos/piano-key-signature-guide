@@ -1,24 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- 
     <meta charset="utf-8" />
--->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Piano App</title>
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <script src="audiosynth.js"></script>
     <script src="getKeySignature.js"></script>
     <script src="playKeyboard.js"></script>
-    <h1>Piano Key Signature Helper</h1>
-    <div id="keyboard"></div>
-    <button>Record</button>
-    <button>Reset</button>
-    <svg height="100" width="100">
-      <circle cx="50" cy="50" r="7" fill="red" />
-    </svg>
-    <div id="keysignatures"></div>
+    <div class="container">
+      <div class="row highlight-black top-buffer">
+        <h1>Piano Key Signature Helper</h1>
+        <h4>
+          A web tool created using JavaScript to help familiarize people with
+          key signatures. To learn more about key signatures,
+          <a href="https://en.wikipedia.org/wiki/Key_signature">click here.</a>
+        </h4>
+        <h4>
+          Try recording a melody and see what the possible key signatures are.
+          Select a key signature from the generated list to see it displayed on
+          the piano. The highlighted keys in green is the TONIC, or the root
+          note. The red is the DOMINANT and the yellow keys are the rest of the
+          keys in the scale.
+        </h4>
+        <h4>
+          Try playing the highlighted keys focusing on the dominant and tonic
+          notes to produce more of a melodic sound!
+        </h4>
+      </div>
+      <div id="keycontainer" class="row top-buffer">
+        <div id="keyboard-container" class="col-lg-6">
+          <div id="keyboard"></div>
+          <button>Record</button>
+          <svg id="recordingLight" height="20" width="30">
+            <circle cx="10" cy="15" r="5" fill="red" />
+          </svg>
+        </div>
+        <div class="col-lg-6 highlight-black" id="keysignatures">
+          <h2>Key Signatures:</h2>
+        </div>
+      </div>
+    </div>
     <script type="text/javascript">
       playKeyboard();
     </script>

@@ -153,12 +153,9 @@ function playKeyboard() {
           thisKey.className = "black key " + n; //2 classes
           thisKey.style.backgroundColor = "black";
           thisKey.dataset.defaultColor = "black";
-          //thisKey.dataset.highlightColor = "MediumSeaGreen";
-          //thisKey.dataset.tonicColor = "NavajoWhite";
-          //thisKey.dataset.dominantColor = "LightSeaGreen";
-          thisKey.dataset.highlightColor = "#82E166";
-          thisKey.dataset.tonicColor = "#EE6055";
-          thisKey.dataset.dominantColor = "#FF9B85";
+          thisKey.dataset.highlightColor = "Khaki";
+          thisKey.dataset.tonicColor = "#00916E";
+          thisKey.dataset.dominantColor = "#FA003F";
           thisKey.dataset.colorType = "default";
           thisKey.style.position = "absolute";
           thisKey.style.color = "white";
@@ -172,11 +169,11 @@ function playKeyboard() {
           thisKey.className = "white key " + n;
           thisKey.style.borderStyle = "solid";
           thisKey.style.position = "absolute";
-          thisKey.style.backgroundColor = "white";
-          thisKey.dataset.defaultColor = "white";
-          thisKey.dataset.highlightColor = "#82E166";
-          thisKey.dataset.tonicColor = "#EE6055";
-          thisKey.dataset.dominantColor = "#FF9B85";
+          thisKey.style.backgroundColor = "AntiqueWhite";
+          thisKey.dataset.defaultColor = "AntiqueWhite";
+          thisKey.dataset.highlightColor = "Khaki";
+          thisKey.dataset.tonicColor = "#00916E";
+          thisKey.dataset.dominantColor = "#FA003F";
           thisKey.dataset.colorType = "default";
           thisKey.style.width = "40px";
           thisKey.style.height = "200px";
@@ -313,50 +310,36 @@ function playKeyboard() {
   window.addEventListener("keydown", fnPlayKeyboard);
   window.addEventListener("keyup", fnRemoveKeyBinding);
 
-  /*
   // Add record and stop button event handlers
-  var buttons = document.querySelectorAll("button");
-  buttons[0].onclick = function () {
-    recordingMelody = true;
-    document.querySelector("svg").style.visibility = "visible";
-    notesRecorded = [];
-  };
-  buttons[1].onclick = function () {
-    recordingMelody = false;
-    document.querySelector("svg").style.visibility = "hidden";
-    getKeySignature(notesRecorded, evtListener[0]);
-    notesRecorded = [];
-  };
-  */
-  // Add record and stop button event handlers
-  var buttons = document.querySelectorAll("button");
-  buttons[0].onclick = function () {
+  var recordButton = document.querySelector("button");
+  recordButton.onclick = function () {
     if (!recordingMelody) {
-      console.log("same");
+      unhighlightAllKeys();
+      resetKeyCards();
       recordingMelody = true;
-      console.log("rM: " + recordingMelody);
-      buttons[0].innerText = "Stop";
+      recordButton.innerText = "Stop";
       document.querySelector("svg").style.visibility = "visible";
       notesRecorded = [];
     } else {
-      console.log("different");
       recordingMelody = false;
-      buttons[0].innerText = "Record";
+      recordButton.innerText = "Record";
       document.querySelector("svg").style.visibility = "hidden";
       getKeySignature(notesRecorded, evtListener[0]);
       notesRecorded = [];
     }
   };
-  buttons[1].onclick = function () {
+
+  // Removes all generated key cards
+  function resetKeyCards() {
     var keySigContainer = document.getElementById("keysignatures");
     while (keySigContainer.lastChild) {
+      if (keySigContainer.lastChild.innerText == "Key Signatures:") break;
       keySigContainer.removeChild(keySigContainer.lastChild);
     }
-  };
+  }
 }
 
-//var recordingMelody = false;
-
+// Checks what the current value of the key on the keyboard is
 function getColorType(element) {
   if (element.dataset.colorType == "default") {
     return element.dataset.defaultColor;
