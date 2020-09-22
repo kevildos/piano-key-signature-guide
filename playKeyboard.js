@@ -1,3 +1,27 @@
+/*
+MIT License
+
+Copyright (c) 2020 1000mileworld
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 function playKeyboard() {
   let pressColor = "#1BC0EA"; //color when key is pressed
 
@@ -186,18 +210,47 @@ function playKeyboard() {
 
         let s = getDispStr(n, i, reverseLookupText);
 
-        label.innerHTML =
-          '<b class="keyLabel">' +
-          s +
-          "</b>" +
-          "<br /><br />" +
-          n.substr(0, 1) +
-          '<span name="OCTAVE_LABEL" value="' +
-          i +
-          '">' +
-          (__octave + parseInt(i)) +
-          "</span>" +
-          (n.substr(1, 1) ? n.substr(1, 1) : "");
+        if (n.length > 1) {
+          label.style.textAlign = "center";
+          label.style.position = "absolute";
+          label.style.left = "-4px";
+          label.style.bottom = "30px";
+          label.style.webkitTextFillColor = "white";
+          label.style.webkitTextStrokeWidth = "0.5px";
+          label.style.webkitTextStrokeColor = "black";
+          label.style.fontSize = "11px";
+          label.innerHTML =
+            '<b class="keyLabel">' +
+            s +
+            "</b>" +
+            "<br /><br />" +
+            n.substr(0, 1) +
+            '<span name="OCTAVE_LABEL" value="' +
+            i +
+            '">' +
+            (__octave + parseInt(i)) +
+            "</span>" +
+            (n.substr(1, 1) ? n.substr(1, 1) : "");
+        } else {
+          label.style.position = "absolute";
+          label.style.left = "4px";
+          label.style.bottom = "30px";
+          label.style.color = "black";
+          label.innerHTML =
+            /*"<br/><br/><br/><br/><br/><br/>" +*/
+            '<b class="keyLabel">' +
+            s +
+            "</b>" +
+            "<br /><br />" +
+            n.substr(0, 1) +
+            '<span name="OCTAVE_LABEL" value="' +
+            i +
+            '">' +
+            (__octave + parseInt(i)) +
+            "</span>" +
+            (n.substr(1, 1) ? n.substr(1, 1) : "");
+        }
+
         thisKey.appendChild(label);
         thisKey.setAttribute("ID", "KEY_" + n + "," + i);
         thisKey.addEventListener(
@@ -337,6 +390,9 @@ function playKeyboard() {
       keySigContainer.removeChild(keySigContainer.lastChild);
     }
   }
+
+  // View all key signatures from the beginning of execution
+  getKeySignature([], evtListener[0]);
 }
 
 // Checks what the current value of the key on the keyboard is
